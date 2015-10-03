@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="goTomeetingsSuite" verbose="2">
+	<listeners>
+		<listener class-name="com.goToMeeting.citrix.core.coretestNGLister" />
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+	</listeners>
+	<test name="CreateWebinarTests" preserve-order="true" >
+		
+		<classes>
+		<class name="com.goToMeeting.citrix.tests.goToMeetingTests">
+		<methods>			
+			<include name="login"/>
+		</methods>
+		</class>>
+		</classes>
+	</test>
+</suite>
