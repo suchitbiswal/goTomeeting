@@ -36,9 +36,20 @@ public class basePageObject extends baseAssertVerify{
 		wait = new WebDriverWait(driver, itime);
 		element = wait.until(ExpectedConditions.visibilityOf(element));		
 		
+		//element = wait.until(ExpectedConditions.visibilityOf(element));
+		
 	}
 	
 
+	public void WaitforPageLoad (String pagetitle, int itime) {
+		log ("Waiting for Page title >>:"+pagetitle+" ");
+		wait = new WebDriverWait(driver, itime);
+		wait.until(ExpectedConditions.titleContains(pagetitle));		
+		
+		
+		
+	}
+	
 	 
 	
 }

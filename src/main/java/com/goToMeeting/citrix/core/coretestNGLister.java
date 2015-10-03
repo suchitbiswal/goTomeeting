@@ -5,6 +5,7 @@ import org.testng.IInvokedMethodListener;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import org.testng.Reporter;
 
 
 public class coretestNGLister implements ITestListener, IInvokedMethodListener{
@@ -39,6 +40,7 @@ public class coretestNGLister implements ITestListener, IInvokedMethodListener{
 		String sTestMethodName = iTestResult.getMethod().getMethodName();
 		String sTestSuiteName = iTestResult.getTestClass().getRealClass().getSimpleName();
 		baseAssertVerify.log("<<< END: " + iTestResult.getMethod().getMethodName()	+ " FAILED >>>");
+		Reporter.log (""+baseAssertVerify.getVerificationFailures ());
 		
 	}
 
