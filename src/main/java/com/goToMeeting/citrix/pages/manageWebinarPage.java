@@ -26,6 +26,9 @@ public class manageWebinarPage extends basePageObject{
 	@FindBy(xpath = ".//*[@id='dateTime']/p")
 	private WebElement webinarDateTime;
 	
+	@FindBy(id = "WebinarInfoID")
+	private WebElement webinarID;
+	
 	
 	
 	
@@ -40,5 +43,9 @@ public class manageWebinarPage extends basePageObject{
 	
 	public String getWebinarDateTime () {
 		return this.webinarDateTime.getText();
+	}
+	
+	public String getWebinarID () {
+		return this.webinarID.getText();
 	}
 }

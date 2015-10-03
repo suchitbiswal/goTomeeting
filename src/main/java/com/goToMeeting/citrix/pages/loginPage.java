@@ -35,7 +35,11 @@ public class loginPage extends basePageObject {
 
 	@FindBy(id = "scheduleWebinar")
 	private WebElement scheduleWebinar;
-
+	
+	@FindBy(xpath = "//*[@class='sidebar-nav']//a[@href='/webinars.tmpl']")
+	private WebElement MyWebinars;
+	
+	
 
 	/**
 	 * Logins to the goTomeeting webinar 
@@ -61,6 +65,11 @@ public class loginPage extends basePageObject {
 	} 
 
 
+	
+	public void goToMyWebinar () {
+		MyWebinars.click();
+	}
+	
 	public void goToCreateWebinar () {
 		WaitForElementToBeClickable(scheduleWebinar, 20);
 		scheduleWebinar.click();

@@ -18,8 +18,8 @@ import org.openqa.selenium.support.ui.Select;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import com.goToMeeting.citrix.core.basePageObject;;
 
-import com.goToMeeting.citrix.core.basePageObject;
 
 public class myWebinarsPage extends basePageObject {
 
@@ -88,10 +88,6 @@ public class myWebinarsPage extends basePageObject {
 	 */
 	public void selectOccurance (String selection) throws Exception {
 
-		/*		log ("Selecting "+selection+"  from the Occurance menu");
-		selectOccurance.click();		
-		WaitForElementToBeClickable(selectOccuranceMenu, 10);
-		selectOccuranceMenu.findElement(By.xpath(".//li[@title='"+selection+"']"));*/
 
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("document.getElementById('recurrenceForm_recurs').style.display='inline';");
@@ -135,7 +131,7 @@ public class myWebinarsPage extends basePageObject {
 		String month = new SimpleDateFormat("MMMM").format(selectDate.getTime());
 		String year= new SimpleDateFormat("YYYY").format(selectDate.getTime());
 		String day= new SimpleDateFormat("d").format(selectDate.getTime());
-		String startTime = new SimpleDateFormat("HH:mm").format(selectDate.getTime());
+		String startTime = new SimpleDateFormat("hh:mm").format(selectDate.getTime());
 		String startTimeAMPM = new SimpleDateFormat("a").format(selectDate.getTime());
 
 		
@@ -167,18 +163,20 @@ public class myWebinarsPage extends basePageObject {
 
 			icount++;
 		}
-		
-		Thread.sleep(20000);
+
 		
         // using js executer because webdriver send keys is not working 
 		
+		log ("selecting end time" + startTime );
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("document.getElementById('webinarTimesForm.dateTimes_0.startTime').value = '"+startTime+"';");
 		selectStartAMPM(startTimeAMPM);
 		
-
-		jse.executeScript("document.getElementById('webinarTimesForm.dateTimes_0.endTime').value = '"+EndTime+"';");
 		selectEndAMPM (endTimeAMPM);
+		JavascriptExecutor jse1 = (JavascriptExecutor) driver;
+		log ("selecting end time" + EndTime );
+		endTimeInput.click();
+		jse1.executeScript("document.getElementById('webinarTimesForm.dateTimes_0.endTime').value = '"+EndTime+"';");
 
 	}
 
@@ -188,7 +186,7 @@ public class myWebinarsPage extends basePageObject {
 	 * @throws Exception 
 	 * @return Date ( For future verification purpose)
 	 */
-	public void selectDateAfterCurrentDate (Date scheduleDate,  int durationInHr) throws Exception {
+	private void selectDateAfterCurrentDate (Date scheduleDate,  int durationInHr) throws Exception {
 
 		//log ("Selecting date after "+NoOfdays+" days From current date");
 		dateInput.click();
@@ -271,7 +269,12 @@ public class myWebinarsPage extends basePageObject {
 	 * @param pageTitle
 	 */
 	public void verifyPageTitle (String pageTitle ) {
-		verifyEquals(pageTitle, driver.getTitle());
+		try {
+		WaitforPageLoad (pageTitle, 20);}
+		catch (Exception e) {
+			verifyEquals(pageTitle, driver.getTitle());}
+			
+		
 	}
 
 
@@ -283,19 +286,18 @@ public class myWebinarsPage extends basePageObject {
 	 * @param [int] durationinHr
 	 * @throws [Exception 
 	 */
-	public void createWebinarAfterNoOfDays (Date scheduleDate, String WebinarTitle,  int duration ) throws Exception {
+	public void createWebinar (Date scheduleDate, String WebinarTitle,  int durationInHr ) throws Exception {
 
 		newWebinarName.sendKeys(WebinarTitle);
 		newWebinarDescription.sendKeys(WebinarTitle);
 		this.selectOccurance ("One session");
-		this.selectDateAfterCurrentDate (scheduleDate,  duration);
-		
-		// adding for debugging purpose
-		Thread.sleep(40000);
+		this.selectDateAfterCurrentDate (scheduleDate,  durationInHr);
 
 
 		this.selectTimeZone("(GMT-07:00) Pacific Time (US and Canada);Tijuana");
+		//Thread.sleep(10000);
 		this.selectlanguage("English");
+		//Thread.sleep(10000);
 		scheduleBtn.click();
 
 	}
