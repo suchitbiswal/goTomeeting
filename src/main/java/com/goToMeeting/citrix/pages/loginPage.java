@@ -1,17 +1,12 @@
 package com.goToMeeting.citrix.pages;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-
 import com.goToMeeting.citrix.core.basePageObject;
 //
 public class loginPage extends basePageObject {
@@ -36,9 +31,6 @@ public class loginPage extends basePageObject {
 	@FindBy(id = "scheduleWebinar")
 	private WebElement scheduleWebinar;
 	
-	@FindBy(xpath = "//*[@class='sidebar-nav']//a[@href='/webinars.tmpl']")
-	private WebElement MyWebinars;
-	
 	
 
 	/**
@@ -51,11 +43,7 @@ public class loginPage extends basePageObject {
 
 		driver.get(url);		
 		driver.manage().window().maximize();
-
-		//WaitForElementToBeClickable(signInLink, 20);		
-		//signInLink.click();
-		
-		
+	
 		WaitForElementToBeClickable(emailAdress, 20);	
 		emailAdress.clear();
 		emailAdress.sendKeys(userName);
@@ -64,11 +52,6 @@ public class loginPage extends basePageObject {
 		submit.click();	
 	} 
 
-
-	
-	public void goToMyWebinar () {
-		MyWebinars.click();
-	}
 	
 	public void goToCreateWebinar () {
 		WaitForElementToBeClickable(scheduleWebinar, 20);
@@ -76,38 +59,6 @@ public class loginPage extends basePageObject {
 	}
 
 	
-
-	public static void main (String []str) {
-
-
-		SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MMMMM-dd" );   
-		Calendar cal = Calendar.getInstance();   		   
-
-
-		
-		//HH:mm a
-
-		System.out.println(new SimpleDateFormat("EEE, MMM d, yyyy K:mm a, z").format(cal.getTime()));
-
-		System.out.println (new SimpleDateFormat("HH:mm a").format(cal.getTime()));
-		
-		System.out.println (new SimpleDateFormat("a").format(cal.getTime()));
-		
-		
-		
-	} 
-	
-	
-
-
-
-
-
-
-
-
-
-
 
 
 }

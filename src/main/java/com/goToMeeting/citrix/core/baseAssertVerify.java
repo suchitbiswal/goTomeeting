@@ -26,22 +26,23 @@ public abstract class baseAssertVerify {
 		return verificationFailures == null ? new ArrayList() : verificationFailures;
 	}
 	
-	public static void assertEquals(String actual, String expected) throws RuntimeException  {
+	public static void verifyEquals(String actual, String expected) throws RuntimeException  {
 		try {
 			Assert.assertEquals(actual, expected);
 			log("Expected value: " + expected + " Actual value: " + actual + " - PASSED");
 		} catch (Exception e) {
-			Reporter.log("Expected value: " + expected + " Actual value: " + actual + " - FAILED");
+			log("Expected value: " + expected + " Actual value: " + actual + " - FAILED");
 			throw new RuntimeException(e);
 		}
 	}
 
 	
-	public static void verifyEquals(Object actual, Object expected) {
+	public static void verifyEquals1(Object actual, Object expected) {
 		try {
 			Assert.assertEquals(actual, expected);
 			log("Expected value: " + expected.toString() + " Actual value: " + actual.toString() + " - PASSED");
 		} catch (Throwable e) {
+			log (e.getMessage());
 			log("Expected value: " + expected.toString() + " Actual value: " + actual.toString() + " - FAILED");
 			addVerificationFailure(e);
 		}

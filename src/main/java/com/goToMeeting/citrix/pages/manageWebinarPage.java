@@ -14,8 +14,6 @@ public class manageWebinarPage extends basePageObject{
 		PageFactory.initElements(driver, this);
 	}
 
-
-	
 	
 	@FindBy(id = "trainingName")
 	private WebElement webinarName;
@@ -29,7 +27,8 @@ public class manageWebinarPage extends basePageObject{
 	@FindBy(id = "WebinarInfoID")
 	private WebElement webinarID;
 	
-	
+	@FindBy(xpath = ".//div[@class='header-logo']")
+	private WebElement MyWebinars;
 	
 	
 	public String getWebinarName () {
@@ -47,5 +46,10 @@ public class manageWebinarPage extends basePageObject{
 	
 	public String getWebinarID () {
 		return this.webinarID.getText();
+	}
+	
+	
+	public void goToMyWebinar () {
+		MyWebinars.click();
 	}
 }

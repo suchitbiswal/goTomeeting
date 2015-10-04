@@ -1,13 +1,11 @@
 package com.goToMeeting.citrix.pages;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.http.client.utils.DateUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,9 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import com.goToMeeting.citrix.core.basePageObject;;
 
 
@@ -73,12 +69,16 @@ public class myWebinarsPage extends basePageObject {
 	@FindBy(xpath = ".//a[@href='#cancelWebinarContainer']")
 	private WebElement cancelWebinarLink;
 	
-
 	@FindBy(id = "manageWebinar")
 	private WebElement manageWebinarContainer;
 	
 	@FindBy(id = "confirmDelete")
 	private WebElement confirmDeleteBtn;
+	
+	@FindBy(id = "upcomingWebinar")
+	private WebElement upcomingWebinar;
+	
+	
 	
 	
 	/**
@@ -104,7 +104,6 @@ public class myWebinarsPage extends basePageObject {
 	 */
 	public Date addDaysTocurrentDate  (int noOfDays) {
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MMMMM-dd" );   
 		Calendar cal = Calendar.getInstance();  
 
 		for (int i=0;i<noOfDays;) {
@@ -124,8 +123,6 @@ public class myWebinarsPage extends basePageObject {
 	 * @throws Exception 
 	 */
 	private void ChoosedateAndTime (Date selectDate, int durationInHr) throws Exception {
-		SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MMMMM-dd" );
-
 		log ("selecting date from date picker is : "+new SimpleDateFormat("yyyy-MMMMM-dd HH:mm a").format(selectDate.getTime()));
 
 		String month = new SimpleDateFormat("MMMM").format(selectDate.getTime());
@@ -200,7 +197,7 @@ public class myWebinarsPage extends basePageObject {
 	 * This will select AM/PM from the list start AMPM list box
 	 * @param inputAMPM
 	 */
-	public void selectStartAMPM (String inputAMPM) throws Exception { 
+	private void selectStartAMPM (String inputAMPM) throws Exception { 
 
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("document.getElementById('webinarTimesForm_dateTimes_0_startAmPm').style.display='inline';");
@@ -210,12 +207,11 @@ public class myWebinarsPage extends basePageObject {
 	}
 	
 	
-
 	/**
 	 * This will select AM/PM from the list end AMPM list box
 	 * @param inputAMPM
 	 */
-	public void selectEndAMPM (String inputAMPM) throws Exception {
+	private void selectEndAMPM (String inputAMPM) throws Exception {
 
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("document.getElementById('webinarTimesForm_dateTimes_0_endAmPm').style.display='inline';");
@@ -231,7 +227,7 @@ public class myWebinarsPage extends basePageObject {
 	 * @param inputTimeZone
 	 * @throws Exception
 	 */
-	public void selectTimeZone (String inputTimeZone) throws Exception{
+	private void selectTimeZone (String inputTimeZone) throws Exception{
 
 
 		String idTimeZone = "webinarTimesForm_timeZone";
@@ -250,7 +246,7 @@ public class myWebinarsPage extends basePageObject {
 	 * @param inputLanguage
 	 * @throws Exception
 	 */
-	public void selectlanguage (String inputLanguage) throws Exception {
+	private void selectlanguage (String inputLanguage) throws Exception {
 
 		String idlanguage = "language";
 
@@ -262,7 +258,6 @@ public class myWebinarsPage extends basePageObject {
 
 	}
 	
-	
 
 	/**
 	 * This verifys the current page title 
@@ -270,9 +265,9 @@ public class myWebinarsPage extends basePageObject {
 	 */
 	public void verifyPageTitle (String pageTitle ) {
 		try {
-		WaitforPageLoad (pageTitle, 20);}
-		catch (Exception e) {
-			verifyEquals(pageTitle, driver.getTitle());}
+		WaitforPageLoad (pageTitle, 20);
+		verifyEquals(pageTitle, driver.getTitle());}
+		catch (Exception e) { }
 			
 		
 	}
@@ -333,9 +328,6 @@ public class myWebinarsPage extends basePageObject {
 	
 	public String formatDateforVerification (Date expDate, int duration) {
 		
-		SimpleDateFormat dateFormat = new SimpleDateFormat( "EEE, d MMM yyyy K:mm a, z" );
-		
-		
 		// add one hour to the current time 
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(expDate);
@@ -351,5 +343,27 @@ public class myWebinarsPage extends basePageObject {
 		return fromdate+EndTime;
 		
 	}
+	
+	public String getWebinarNameFromMyWebinar (String webinarID) {
+		
+		webinarID=webinarID.replaceAll("-", "");
+		return upcomingWebinar.findElement(By.xpath(".//*[@data-amid='"+webinarID+"']")).findElement(By.cssSelector(".titleLong span")).getText();	
+		
+	}
+	
+	public String getWebinarDateTimeFromMyWebinar (String webinarID) {
+		webinarID=webinarID.replaceAll("-", "");
+		
+		String date1 = upcomingWebinar.findElement(By.xpath(".//*[@data-amid='"+webinarID+"']")).findElement(By.cssSelector(".myWebinarDate span")).getText();
+		
+		String date2 =  upcomingWebinar.findElement(By.xpath(".//*[@data-amid='"+webinarID+"']")).findElement(By.cssSelector(".column-7 > .myWebinarDetailInfo")).getText();
+		
+		
+		return date1+date2;
+		
+		
+	}
+	
+	
 	
 }

@@ -16,10 +16,7 @@ public class basePageObject extends baseAssertVerify{
 		
 	}
 		
-
-	
 	// TBD Suchit : Wait methods go here 
-	
 	
 	public void WaitForElementToBeClickable (WebElement element, int itime) {
 		
