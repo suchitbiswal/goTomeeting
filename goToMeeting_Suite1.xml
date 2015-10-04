@@ -10,7 +10,7 @@
 		<classes>
 		<class name="com.goToMeeting.citrix.tests.goToMeetingTests">
 		<methods>			
-			<include name="login"/>
+			<include name="createWebinarTest"/>
 		</methods>
 		</class>>
 		</classes>
