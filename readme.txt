@@ -17,7 +17,7 @@ Will the these instructions project setup should have been complete
 Execution instruction : 
 	1. I have kept it simple for now, it will execute the only test that I created from commandline 
 	2. it supports chrome and firefox browser for now, please make changes in the testconfig.properties to change the browser 
-	3. Suite file can conroll the execution classes and methods 
+	3. testNG suite file which will drive the execution
 	4. For execution from command line 
 		a. open terminal / dos prompt 
 		b. go to folder /workspace/goTomeeting, where pom.xml is present execute the below command 
