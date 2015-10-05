@@ -332,11 +332,31 @@ public class myWebinarsPage extends basePageObject {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(expDate);
 		
-		String fromdate = new SimpleDateFormat("EEE, MMM d, yyyy K:mm a - ").format(calendar.getTime());
+		String fromdate = new SimpleDateFormat("EEE, MMM d, yyyy h:mm a - ").format(calendar.getTime());
 		
 		calendar.add(Calendar.HOUR, duration);
 		Date toDate = calendar.getTime();
-		String EndTime  = new SimpleDateFormat("K:mm a z").format(toDate.getTime());
+		String EndTime  = new SimpleDateFormat("h:mm a z").format(toDate.getTime());
+		
+		log (fromdate+EndTime);
+		
+		return fromdate+EndTime;
+		
+	}
+	
+	
+	
+	public String formatDateforVerificationForMyWebinar (Date expDate, int duration) {
+		
+		// add one hour to the current time 
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(expDate);
+		
+		String fromdate = new SimpleDateFormat("EEE, MMM d h:mm a - ").format(calendar.getTime());
+		
+		calendar.add(Calendar.HOUR, duration);
+		Date toDate = calendar.getTime();
+		String EndTime  = new SimpleDateFormat("h:mm a z").format(toDate.getTime());
 		
 		log (fromdate+EndTime);
 		
@@ -359,7 +379,7 @@ public class myWebinarsPage extends basePageObject {
 		String date2 =  upcomingWebinar.findElement(By.xpath(".//*[@data-amid='"+webinarID+"']")).findElement(By.cssSelector(".column-7 > .myWebinarDetailInfo")).getText();
 		
 		
-		return date1+date2;
+		return date1+" "+date2;
 		
 		
 	}

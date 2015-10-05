@@ -59,7 +59,7 @@ public class goToMeetingTests extends baseWebDriver  {
 		managewebinar.goToMyWebinar();
 		mywebinar.verifyPageTitle("My Webinars");
 		verifyEquals(mywebinar.getWebinarNameFromMyWebinar(WebinarId), WebinarTitle);
-		verifyEquals(mywebinar.getWebinarDateTimeFromMyWebinar(WebinarId), mywebinar.formatDateforVerification(scheduleDate, 2));
+		verifyEquals(mywebinar.getWebinarDateTimeFromMyWebinar(WebinarId), mywebinar.formatDateforVerificationForMyWebinar(scheduleDate, durationOfWebinar));
 			
 
 		
