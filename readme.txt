@@ -3,7 +3,7 @@ Setup instructions for eclipse
 	1. Make sure the machine has maven and JDK 1.7.* installed 
 	2. pull the project from github
 	3. go to the folder /workspace/goTomeeting, make sure pom.xml is present 
-	4. here are the commands to create the project for eclips e
+	4. here are the commands to create the project for eclipse
 		a. mvn eclipse:clean 
 		b. mvn eclipse:eclipse 
 	5. mvn eclipse:eclipse will take some time to download the dependencies 
@@ -15,7 +15,7 @@ Setup instructions for eclipse
 Will the these instructions project setup should have been complete 
 
 Execution instruction : 
-	1. I have kept it simple for now, it will execute the only test that I created from commandline 
+	1. I have kept it simple for now, it will execute the only test that I created from command line 
 	2. it supports chrome and firefox browser for now, please make changes in the testconfig.properties to change the browser 
 	3. testNG suite file which will drive the execution
 	4. For execution from command line 
